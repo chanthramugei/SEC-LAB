@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+// while loop: print numbers 1 to 10
+let i = 1;
+while (i <= 10) {
+  console.log(i);
+  i++;
+}
+
+// do-while loop: prompt until 'yes' is entered
+let input;
+do {
+  input = prompt("Enter 'yes' to proceed:");
+} while (input !== "yes");
+console.log("Proceeding...");
+
+// for loop: sum of first N numbers
+let N = 5;
+let sum = 0;
+for (let j = 1; j <= N; j++) {
+  sum += j;
+}
+console.log("Sum of first 5 natural numbers:", sum);
+
+// nested for loop: multiplication table 1 to 3
+for (let row = 1; row <= 3; row++) {
+  for (let col = 1; col <= 5; col++) {
+    console.log(`${row} x ${col} = ${row * col}`);
+  }
+  console.log("-----");
+}
+    </script>
+</body>
+</html>
