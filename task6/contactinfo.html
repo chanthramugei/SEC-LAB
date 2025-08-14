@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Document</title>
+</head>
+<body>
+  <h2>Contacts List</h2>
+  <pre id="output"></pre>
+
+<script>
+  // Contact constructor with display method
+  function Contact(name, phone, email) {
+    this.name = name;
+    this.phone = phone;
+    this.email = email;
+
+    // Method to display contact info with destructuring
+    this.displayInfo = function() {
+      // Destructuring 'this' object
+      const { name, phone, email } = this;
+      return `Name: ${name}, Phone: ${phone}, Email: ${email}`;
+    }
+  }
+
+  // Create some contacts
+  const contacts1 = [
+    new Contact('Taehyung', '9967904567', 'kimtaehyung@gmail.com'),
+    new Contact('Jungkook', '9874576543', 'jeonjungkook@gmail.com')
+  ];
+
+  const contacts2 = [
+    new Contact('Jimin', '965597299', 'parkjimin@gmail.com'),
+    new Contact('Yoongi', '905271078', 'minyoongi@gmail.com')
+  ];
+
+  // Function to add multiple contacts using rest parameters
+  function addContacts(contactArray, ...newContacts) {
+    contactArray.push(...newContacts);
+  }
+
+  // Merge multiple contact arrays using spread operator
+  const allContacts = [...contacts1, ...contacts2];
+
+  // Iterate and print contacts using both dot and bracket notation
+  function printContacts(contactArray) {
+    let output = '';
+    contactArray.forEach((contact, index) => {
+      // Accessing properties using dot and bracket notation
+      output += `${index + 1}. Name: ${contact.name}, `;
+      output += `Phone: ${contact['phone']}, `;
+      output += `Email: ${contact.email}\n`;
+
+      // Using the displayInfo method
+      output += `   Display Info Method: ${contact.displayInfo()}\n`;
+    });
+    return output;
+  }
+
+  // Demonstrate call(), apply(), and bind()
+  // Create a new object without displayInfo method
+  const newPerson = {
+    name: 'Hoseok',
+    phone: '992225973',
+    email: 'junghoseok@gmail.com'
+  };
+
+  // Borrow displayInfo from a contact object
+  const displayBorrowed = contacts1[0].displayInfo;
+
+  // Using call()
+  const callResult = displayBorrowed.call(newPerson);
+
+  // Using apply()
+  const applyResult = displayBorrowed.apply(newPerson);
+
+  // Using bind()
+  const boundDisplay = displayBorrowed.bind(newPerson);
+  const bindResult = boundDisplay();
+
+  // Add new contacts using rest params function
+  addContacts(allContacts,
+    new Contact('Seokjin', '9677790501', 'kimseokjin@gmail.com'),
+    new Contact('Namjoon', '9965091919', 'kimnamjoon@gmail.com')
+  );
+
+  // Print everything
+  const outputElem = document.getElementById('output');
+  outputElem.textContent =
+    'All Contacts:\n' + printContacts(allContacts) +
+    '\nBorrowed displayInfo using call(): ' + callResult +
+    '\nBorrowed displayInfo using apply(): ' + applyResult +
+    '\nBorrowed displayInfo using bind(): ' + bindResult;
+</script>
+</body>
+</html>
